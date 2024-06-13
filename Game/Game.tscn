@@ -152,6 +152,7 @@ size = Vector2(256, 256)
 
 [node name="AnimPlayer" type="CharacterBody2D" parent="."]
 position = Vector2(149, 115)
+collision_layer = 2
 script = ExtResource("1_mrmob")
 metadata/_edit_group_ = true
 

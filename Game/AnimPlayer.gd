@@ -33,6 +33,6 @@ func _physics_process(delta):
 	animate()
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info:
-		velocity = velocity.bounce(collision_info.get_normal())
+		#velocity = velocity.bounce(collision_info.get_normal())
 		move_and_collide(velocity * delta * 10)
 	#move_and_slide()
