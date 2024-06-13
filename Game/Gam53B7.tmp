@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://c33px6vdjy0an"]
+[gd_scene load_steps=23 format=3 uid="uid://c33px6vdjy0an"]
 
 [ext_resource type="Script" path="res://Game/AnimPlayer.gd" id="1_mrmob"]
 [ext_resource type="Texture2D" uid="uid://bkgaw070xue0m" path="res://Sprites/Danny_Torrance.png" id="2_cf01c"]
@@ -140,18 +140,12 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ch1bi"]
-size = Vector2(34, 27)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3xbqo"]
-size = Vector2(250, 250)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sjuqd"]
-size = Vector2(256, 256)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ci63k"]
 
 [node name="Game" type="Node2D"]
 
 [node name="AnimPlayer" type="CharacterBody2D" parent="."]
-position = Vector2(149, 115)
 script = ExtResource("1_mrmob")
 metadata/_edit_group_ = true
 
@@ -161,65 +155,30 @@ sprite_frames = SubResource("SpriteFrames_24ayn")
 animation = &"up"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimPlayer"]
-position = Vector2(320, 247)
 shape = SubResource("RectangleShape2D_ch1bi")
-
-[node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2(769, 111)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
-position = Vector2(1, 1)
-shape = SubResource("RectangleShape2D_3xbqo")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
-position = Vector2(-0.0754089, 0.356781)
-texture = ExtResource("3_j4ewu")
-
-[node name="StaticBody2D6" type="StaticBody2D" parent="."]
-position = Vector2(503, 587)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D6"]
-position = Vector2(1, 1)
-shape = SubResource("RectangleShape2D_3xbqo")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D6"]
-position = Vector2(-0.0754089, 0.356781)
-texture = ExtResource("3_j4ewu")
-
-[node name="StaticBody2D4" type="StaticBody2D" parent="."]
-position = Vector2(483, 138)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
-position = Vector2(1, 1)
-shape = SubResource("RectangleShape2D_3xbqo")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D4"]
-position = Vector2(-0.0754089, 0.356781)
-texture = ExtResource("3_j4ewu")
-
-[node name="StaticBody2D5" type="StaticBody2D" parent="."]
-position = Vector2(248, 352)
-metadata/_edit_group_ = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
-position = Vector2(1, 1)
-shape = SubResource("RectangleShape2D_3xbqo")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D5"]
-position = Vector2(-0.0754089, 0.356781)
-texture = ExtResource("3_j4ewu")
+one_way_collision = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(-44, 803)
+position = Vector2(0, -1)
+collision_mask = 2
 metadata/_edit_group_ = true
 
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
-position = Vector2(825.375, -420.928)
+[node name="BrickWallTexture" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(653, 232)
 texture = ExtResource("3_j4ewu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(824.375, -420.928)
-shape = SubResource("RectangleShape2D_sjuqd")
+shape = SubResource("RectangleShape2D_ci63k")
+one_way_collision = true
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+position = Vector2(3, 73)
+
+[node name="BrickWallTexture" type="Sprite2D" parent="StaticBody2D2"]
+position = Vector2(53, 193.5)
+scale = Vector2(0.4375, 1.16797)
+texture = ExtResource("3_j4ewu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+one_way_collision = true
+one_way_collision_margin = 0.0

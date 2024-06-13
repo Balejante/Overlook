@@ -23,7 +23,16 @@ func animate():
 func move_8way(delta):
 	get_8way_input()
 	animate()
-	move_and_slide()
+	#move_and_slide()
+
+#func _physics_process(delta):
+	#move_8way(delta)
 
 func _physics_process(delta):
-	move_8way(delta)
+	get_8way_input()
+	animate()
+	var collision_info = move_and_collide(velocity * delta)
+	if collision_info:
+		velocity = velocity.bounce(collision_info.get_normal())
+		move_and_collide(velocity * delta * 10)
+	#move_and_slide()
