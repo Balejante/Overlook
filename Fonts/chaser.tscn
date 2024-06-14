@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://cllqqt23fkhsh"]
+
+[ext_resource type="Texture2D" uid="uid://do60csma7ph6b" path="res://Sprites/Brickwall2_Texture.png" id="1_2k2cx"]
+[ext_resource type="PackedScene" uid="uid://drb80dfp2b0wg" path="res://enemy.tscn" id="2_17si3"]
+[ext_resource type="PackedScene" uid="uid://dko27bame2c8n" path="res://player.tscn" id="3_xb40w"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_x6qjk"]
+vertices = PackedVector2Array(1141, 14, 1138, 640, 1051, 458, 1051, 223, 10, 646, 156, 458, 13, 12, 156, 223)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 1, 4, 5), PackedInt32Array(5, 4, 6, 7), PackedInt32Array(7, 6, 0, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(4, 2, 1152, 5, 1148, 650, 0, 657)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xc5o3"]
+size = Vector2(255.357, 255)
+
+[node name="Chaser" type="Node2D"]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_x6qjk")
+
+[node name="walls" type="Node2D" parent="NavigationRegion2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D/walls"]
+position = Vector2(604, 340)
+scale = Vector2(3.36, 0.8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="NavigationRegion2D/walls/StaticBody2D"]
+position = Vector2(0.297623, 0)
+shape = SubResource("RectangleShape2D_xc5o3")
+
+[node name="Sprite2D" type="Sprite2D" parent="NavigationRegion2D/walls/StaticBody2D"]
+texture = ExtResource("1_2k2cx")
+
+[node name="enemy" parent="." node_paths=PackedStringArray("character_to_chase") instance=ExtResource("2_17si3")]
+position = Vector2(272, 124)
+character_to_chase = NodePath("../player")
+
+[node name="player" parent="." instance=ExtResource("3_xb40w")]
+position = Vector2(267, 516)
+script = null

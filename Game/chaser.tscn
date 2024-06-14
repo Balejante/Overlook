@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpwngeweywhyy"]
+
+[ext_resource type="PackedScene" uid="uid://bjvgdvep82a8q" path="res://Game/enemy.tscn" id="2_17si3"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_x6qjk"]
+vertices = PackedVector2Array(1141, 14, 1138, 640, 1051, 458, 1051, 223, 10, 646, 156, 458, 13, 12, 156, 223)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 1, 4, 5), PackedInt32Array(5, 4, 6, 7), PackedInt32Array(7, 6, 0, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(4, 2, 1152, 5, 1148, 650, 0, 657)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
+[node name="Chaser" type="Node2D"]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(3, 5)
+navigation_polygon = SubResource("NavigationPolygon_x6qjk")
+
+[node name="walls" type="Node2D" parent="NavigationRegion2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="NavigationRegion2D/walls"]
+position = Vector2(604, 340)
+scale = Vector2(3.36, 0.8)
+
+[node name="enemy" parent="." instance=ExtResource("2_17si3")]
+position = Vector2(272, 124)

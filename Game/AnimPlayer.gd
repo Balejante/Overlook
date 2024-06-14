@@ -1,8 +1,11 @@
 extends CharacterBody2D
 
-@export var speed = 300.0
+@export var speed = 250.0
 
 @onready var sprite = $PlayerSprite
+
+@export var character_to_chase: CharacterBody2D
+@onready var navigation_agent = $NavigationAgent2D
 
 func get_8way_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")

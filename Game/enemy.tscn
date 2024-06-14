@@ -1,0 +1,169 @@
+[gd_scene load_steps=21 format=3 uid="uid://p8e6efmn65un"]
+
+[ext_resource type="Texture2D" uid="uid://dy7s02vihghe4" path="res://Sprites/Jack_Torrance.png" id="2_h6xxo"]
+
+[sub_resource type="GDScript" id="GDScript_3nipx"]
+script/source = "extends Node2D
+var player : CharacterBody2D
+
+#@onready var navigation_agent = $NavigationAgent2D
+#@export var character_to_chase: AnimationPlayer
+
+const SPEED = 180.0
+
+func _physics_process(delta):
+	player = $AnimPlayer
+	if player.position.y > 2300:
+		get_tree().change_scene_to_file(\"res://Game/vitoria.tscn\")
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6d4q4"]
+atlas = ExtResource("2_h6xxo")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_56dcx"]
+atlas = ExtResource("2_h6xxo")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o2xye"]
+atlas = ExtResource("2_h6xxo")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dffcr"]
+atlas = ExtResource("2_h6xxo")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2d6cg"]
+atlas = ExtResource("2_h6xxo")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dtqun"]
+atlas = ExtResource("2_h6xxo")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5aga"]
+atlas = ExtResource("2_h6xxo")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xul2l"]
+atlas = ExtResource("2_h6xxo")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2su3h"]
+atlas = ExtResource("2_h6xxo")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2gg0w"]
+atlas = ExtResource("2_h6xxo")
+region = Rect2(32, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76e8x"]
+atlas = ExtResource("2_h6xxo")
+region = Rect2(64, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sre84"]
+atlas = ExtResource("2_h6xxo")
+region = Rect2(96, 64, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5c7p"]
+atlas = ExtResource("2_h6xxo")
+region = Rect2(0, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lownf"]
+atlas = ExtResource("2_h6xxo")
+region = Rect2(32, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5yrel"]
+atlas = ExtResource("2_h6xxo")
+region = Rect2(64, 96, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_276dg"]
+atlas = ExtResource("2_h6xxo")
+region = Rect2(96, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w4ie7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6d4q4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_56dcx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o2xye")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dffcr")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2d6cg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dtqun")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5aga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xul2l")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2su3h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2gg0w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_76e8x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sre84")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i5c7p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lownf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5yrel")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_276dg")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hj4wo"]
+radius = 14.0
+
+[node name="enemy" type="CharacterBody2D"]
+script = SubResource("GDScript_3nipx")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_w4ie7")
+animation = &"down"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, 1)
+shape = SubResource("CircleShape2D_hj4wo")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
