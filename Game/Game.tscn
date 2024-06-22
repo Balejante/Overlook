@@ -8,6 +8,7 @@
 
 [sub_resource type="GDScript" id="GDScript_3nipx"]
 script/source = "extends Node2D
+
 var player : CharacterBody2D
 
 #@onready var navigation_agent = $NavigationAgent2D
@@ -17,6 +18,7 @@ const SPEED = 180.0
 
 func _physics_process(delta):
 	player = $AnimPlayer
+	#enemy = $enemy
 	if player.position.y > 2300:
 		get_tree().change_scene_to_file(\"res://Game/vitoria.tscn\")
 "
@@ -29,9 +31,6 @@ source_geometry_group_name = &"navigation_polygon_source_group"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3xbqo"]
 size = Vector2(255, 256)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ynyl"]
-size = Vector2(43, 59)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q733q"]
 atlas = ExtResource("6_wxqc4")
@@ -167,6 +166,9 @@ animations = [{
 "name": &"up",
 "speed": 5.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ynyl"]
+size = Vector2(43, 59)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dndj5"]
 atlas = ExtResource("2_cf01c")
@@ -953,17 +955,22 @@ script = ExtResource("5_uoun3")
 character_to_chase = NodePath("../AnimPlayer")
 metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy"]
-position = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_0ynyl")
-metadata/_edit_group_ = true
-
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="enemy"]
 
 [node name="enemySprite" type="AnimatedSprite2D" parent="enemy"]
 scale = Vector2(2.2, 2.2)
 sprite_frames = SubResource("SpriteFrames_mkiio")
 animation = &"down"
+metadata/_edit_group_ = true
+
+[node name="Area2D" type="Area2D" parent="enemy" groups=["enemy"]]
+position = Vector2(5, 101)
+scale = Vector2(1, 1.01567)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="enemy/Area2D"]
+position = Vector2(-4.5, -98.9495)
+scale = Vector2(1, 0.984572)
+shape = SubResource("RectangleShape2D_0ynyl")
 metadata/_edit_group_ = true
 
 [node name="AnimPlayer" type="CharacterBody2D" parent="."]
@@ -977,8 +984,12 @@ scale = Vector2(2, 2)
 sprite_frames = SubResource("SpriteFrames_24ayn")
 animation = &"down"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimPlayer"]
+[node name="Camera2D" type="Camera2D" parent="AnimPlayer"]
+
+[node name="Area2D" type="Area2D" parent="AnimPlayer" groups=["player"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimPlayer/Area2D"]
 scale = Vector2(2.04373, 2.0575)
 shape = SubResource("RectangleShape2D_ch1bi")
 
-[node name="Camera2D" type="Camera2D" parent="AnimPlayer"]
+[connection signal="area_entered" from="AnimPlayer/Area2D" to="AnimPlayer" method="_on_area_2d_area_entered"]

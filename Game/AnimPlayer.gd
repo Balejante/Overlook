@@ -39,3 +39,8 @@ func _physics_process(delta):
 		#velocity = velocity.bounce(collision_info.get_normal())
 		move_and_collide(velocity * delta * 10)
 	#move_and_slide()
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.is_in_group("enemy"):
+		get_tree().change_scene_to_file("res://Game/derrota.tscn")
