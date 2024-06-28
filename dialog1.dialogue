@@ -1,0 +1,13 @@
+~ start
+if global.task_given == false
+	Twins: [[Come play with us Danny]]
+	- Help me!
+		Twins: Do you want to leave?
+		- Yes, please!
+			Twins: Go where the knowledge sleeps.
+		- Not yet => END
+	- Goodbye => END
+else:
+	Twins: You should go now...
+	=> END
+=> END

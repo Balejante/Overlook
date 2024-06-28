@@ -3,6 +3,7 @@ extends CharacterBody2D
 @export var speed = 250.0
 
 @onready var sprite = $PlayerSprite
+var twins_in_range = false
 
 @export var character_to_chase: CharacterBody2D
 @onready var navigation_agent = $NavigationAgent2D
@@ -39,8 +40,21 @@ func _physics_process(delta):
 		#velocity = velocity.bounce(collision_info.get_normal())
 		move_and_collide(velocity * delta * 10)
 	#move_and_slide()
-
+	if twins_in_range == true:
+		if Input.is_action_just_pressed("ui_accept"):
+			DialogueManager.show_dialogue_balloon(load("res://dialog1.dialogue"),"start")
+			return
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy"):
 		get_tree().change_scene_to_file("res://Game/derrota.tscn")
+
+
+func _on_area_2d_body_entered(body):
+	if body.has_method("ghost"):
+		twins_in_range = true
+
+
+func _on_area_2d_body_exited(body):
+	if body.has_method("ghost"):
+		twins_in_range = false
