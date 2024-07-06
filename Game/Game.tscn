@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://c33px6vdjy0an"]
+[gd_scene load_steps=70 format=3 uid="uid://c33px6vdjy0an"]
 
 [ext_resource type="Script" path="res://Game/AnimPlayer.gd" id="1_mrmob"]
 [ext_resource type="Texture2D" uid="uid://bkgaw070xue0m" path="res://Sprites/Danny_Torrance.png" id="2_cf01c"]
@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://dkhk2k8hpmaee" path="res://Sprites/char.png" id="6_cc6dm"]
 [ext_resource type="Script" path="res://Game/ghost.gd" id="6_qg3rf"]
 [ext_resource type="Texture2D" uid="uid://dy7s02vihghe4" path="res://Sprites/Jack_Torrance.png" id="6_wxqc4"]
+[ext_resource type="Texture2D" uid="uid://dnugt4nfbrxwd" path="res://icon.svg" id="8_a44oa"]
+[ext_resource type="Script" path="res://Game/item.gd" id="8_mfnam"]
 
 [sub_resource type="GDScript" id="GDScript_3nipx"]
 script/source = "extends Node2D
@@ -23,6 +25,11 @@ func _physics_process(delta):
 	#enemy = $enemy
 	if player.position.y > 2600:
 		get_tree().change_scene_to_file(\"res://Game/vitoria.tscn\")
+
+func _process(delta):
+	if global.item_taken == true:
+		$item.visible = false
+		$\"item/item-shape\".disabled = true
 "
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_2wn1h"]
@@ -450,6 +457,12 @@ animations = [{
 "name": &"up",
 "speed": 5.0
 }]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i7bkq"]
+size = Vector2(62, 64)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_alnlk"]
+radius = 88.0909
 
 [node name="Game" type="Node2D"]
 script = SubResource("GDScript_3nipx")
@@ -1153,6 +1166,28 @@ scale = Vector2(1, 0.984375)
 sprite_frames = SubResource("SpriteFrames_4xkmd")
 animation = &"right"
 
+[node name="item" type="StaticBody2D" parent="."]
+position = Vector2(-40, 2016)
+script = ExtResource("8_mfnam")
+
+[node name="item-shape" type="CollisionShape2D" parent="item"]
+position = Vector2(24, 44)
+shape = SubResource("RectangleShape2D_i7bkq")
+
+[node name="item_detection_area" type="Area2D" parent="item"]
+position = Vector2(24, 44)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="item/item_detection_area"]
+shape = SubResource("CircleShape2D_alnlk")
+
+[node name="Sprite2D" type="Sprite2D" parent="item"]
+position = Vector2(24, 44)
+scale = Vector2(0.480469, 0.503624)
+texture = ExtResource("8_a44oa")
+
 [connection signal="area_entered" from="AnimPlayer/Area2D" to="AnimPlayer" method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="AnimPlayer/Area2D" to="AnimPlayer" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="AnimPlayer/Area2D" to="AnimPlayer" method="_on_area_2d_body_exited"]
+[connection signal="area_entered" from="item/item_detection_area" to="AnimPlayer" method="_on_item_detection_area_area_entered"]
+[connection signal="body_entered" from="item/item_detection_area" to="AnimPlayer" method="_on_item_detection_area_body_entered"]
+[connection signal="body_exited" from="item/item_detection_area" to="AnimPlayer" method="_on_item_detection_area_body_exited"]

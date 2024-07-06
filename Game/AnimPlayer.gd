@@ -8,6 +8,8 @@ var twins_in_range = false
 @export var character_to_chase: CharacterBody2D
 @onready var navigation_agent = $NavigationAgent2D
 
+var item_detection = false
+
 func get_8way_input():
 	var input_direction = Input.get_vector("left", "right", "up", "down")
 	velocity = input_direction * speed
@@ -44,6 +46,9 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("ui_accept"):
 			DialogueManager.show_dialogue_balloon(load("res://dialog1.dialogue"),"start")
 			return
+	if item_detection == true:
+		if Input.is_action_just_pressed("ui_accept"):
+			global.item_taken = true
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy"):
@@ -58,3 +63,15 @@ func _on_area_2d_body_entered(body):
 func _on_area_2d_body_exited(body):
 	if body.has_method("ghost"):
 		twins_in_range = false
+
+
+func _on_item_detection_area_body_entered(body):
+	if body.has_method("player"):
+		print("item detection")
+		item_detection = true # Replace with function body.
+
+
+func _on_item_detection_area_body_exited(body):
+	if body.has_method("player"):
+		print("item detection")
+		item_detection = false # Replace with function body.
