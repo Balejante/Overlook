@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://b28i3bm18f6ht"]
+[gd_scene load_steps=73 format=3 uid="uid://b28i3bm18f6ht"]
 
 [ext_resource type="Texture2D" uid="uid://iyskjj7x8fuq" path="res://Sprites/Tiles/mine2.png" id="4_vhu8s"]
 [ext_resource type="Script" path="res://Game/enemy.gd" id="5_e4rfi"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://c0f1pebtkyn7s" path="res://Sprites/BaetoriceSpriteRPGMakerVXAce.png" id="8_l5l8a"]
 [ext_resource type="Script" path="res://Game/ghost.gd" id="9_tbum8"]
 [ext_resource type="Texture2D" uid="uid://dxjhayv7bdcrx" path="res://Sprites/99e4543b507dae7.png" id="10_tu2jt"]
+[ext_resource type="AudioStream" uid="uid://crtn0m3f0s1xo" path="res://Audio/Pokemon Fire Red and Leaf Green - Lavender Town music.mp3" id="11_0jv30"]
 [ext_resource type="Script" path="res://Game/item.gd" id="11_c1cxw"]
 
 [sub_resource type="GDScript" id="GDScript_3nipx"]
@@ -24,10 +25,21 @@ const SPEED = 180.0
 func _physics_process(delta):
 	player = $AnimPlayer
 	#enemy = $enemy
-	if player.position.y > 3000:
-		get_tree().change_scene_to_file(\"res://Game/um.tscn\")
+	if player.position.y > 3000 and global.tak_given == true and global.item_taken == true:
+		get_tree().change_scene_to_file(\"res://Game/dois.tscn\")
+		global.tak_given = false
+		global.item_taken = false
+		global.task1_given = false
+		global.task2_given = true
 
 func _process(delta):
+	if global.tak_given == false:
+		$item.visible = false
+		$\"item/item-shape\".disabled = false
+	else: 
+		$item.visible = true
+		$\"item/item-shape\".disabled = false
+
 	if global.item_taken == true:
 		$item.visible = false
 		$\"item/item-shape\".disabled = true
@@ -2999,7 +3011,7 @@ sprite_frames = SubResource("SpriteFrames_4xkmd")
 animation = &"down"
 
 [node name="item" type="StaticBody2D" parent="."]
-position = Vector2(71, 336)
+position = Vector2(-976, 376)
 script = ExtResource("11_c1cxw")
 
 [node name="item-shape" type="CollisionShape2D" parent="item"]
@@ -3016,6 +3028,12 @@ scale = Vector2(0.0809506, 0.0725727)
 texture = ExtResource("10_tu2jt")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(311, 1472)
+stream = ExtResource("11_0jv30")
+volume_db = -20.0
+autoplay = true
 
 [connection signal="area_entered" from="AnimPlayer/Area2D" to="AnimPlayer" method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="AnimPlayer/Area2D" to="AnimPlayer" method="_on_area_2d_body_entered"]

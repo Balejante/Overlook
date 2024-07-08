@@ -1,5 +1,5 @@
 ~ start
-if global.tak_given == false and global.item_taken == false
+if global.tak_given == false and global.item_taken == false and global.task1_given == true:
 	Ghost: [[Come play with us Danny]]
 	- Help me!
 		Ghost: Do you want to leave?
@@ -8,6 +8,20 @@ if global.tak_given == false and global.item_taken == false
 			set global.tak_given = true
 		- Not yet => END
 	- Goodbye => END
+elif global.tak_given == false and global.item_given == false and global.task2_given == true:
+	Ghost: [[Hi|Hello]], Danny. What do you want now?
+	- How do I go outside?
+		Ghost: I think Mr. Ullman keeps the keys in his office...
+		set global.tak_given = true
+		=> END
+	- Nothing => END
+elif global.tak_given == false and global.item_given == false and global.task3_given == true:
+	Ghost: Already leaving, Danny?
+	- How do I leave the Maze?
+		Ghost: You should go where your heart tells.
+		set global.tak_given = true
+		=> END
+	- Not yet => END
 else:
 	Ghost: You should go now...
 	=> END

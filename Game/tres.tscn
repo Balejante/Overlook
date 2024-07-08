@@ -24,10 +24,16 @@ const SPEED = 180.0
 func _physics_process(delta):
 	player = $AnimPlayer
 	#enemy = $enemy
-	if player.position.y < 80:
+	if player.position.y < 80 and global.tak_given == true and global.item_taken == true:
 		get_tree().change_scene_to_file(\"res://Game/vitoria.tscn\")
 
 func _process(delta):
+	if global.tak_given == false:
+		$item.visible = false
+		$\"item/item-shape\".disabled = false
+	else: 
+		$item.visible = true
+		$\"item/item-shape\".disabled = false
 	if global.item_taken == true:
 		$item.visible = false
 		$\"item/item-shape\".disabled = true
@@ -3793,7 +3799,7 @@ sprite_frames = SubResource("SpriteFrames_4xkmd")
 animation = &"down"
 
 [node name="item" type="StaticBody2D" parent="."]
-position = Vector2(-614, 1500)
+position = Vector2(-616, 1482)
 script = ExtResource("9_t1e71")
 
 [node name="item-shape" type="CollisionShape2D" parent="item"]
