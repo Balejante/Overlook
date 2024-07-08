@@ -4,6 +4,7 @@ extends CharacterBody2D
 
 @onready var sprite = $PlayerSprite
 var twins_in_range = false
+var chatting = false
 
 @export var character_to_chase: CharacterBody2D
 @onready var navigation_agent = $NavigationAgent2D
@@ -37,6 +38,7 @@ func move_8way(delta):
 
 func _physics_process(delta):
 	if !Global.is_chatting:
+		chatting = false
 		get_8way_input()
 	animate()
 	var collision_info = move_and_collide(velocity * delta)
@@ -48,7 +50,9 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("ui_accept"):
 			Global.is_chatting = true
 			print(Global.is_chatting, "conversa começou")
-			DialogueManager.show_dialogue_balloon(load("res://dialog1.dialogue"),"start")
+			if !chatting:
+				chatting = true
+				DialogueManager.show_dialogue_balloon(load("res://dialog1.dialogue"),"start")
 			return
 	if item_detection == true:
 		if Input.is_action_just_pressed("ui_accept"):
