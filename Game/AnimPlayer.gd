@@ -44,7 +44,7 @@ func _physics_process(delta):
 	#move_and_slide()
 	if twins_in_range == true:
 		if Input.is_action_just_pressed("ui_accept"):
-			DialogueManager.show_dialogue_balloon(load("res://dialog1.dialogue"),"start")
+			DialogueManager.show_dialogue_balloon(load("res://dialogo2.dialogue"),"start")
 			return
 	if item_detection == true:
 		if Input.is_action_just_pressed("ui_accept"):

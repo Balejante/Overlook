@@ -1,13 +1,14 @@
 ~ start
-if global.task_given == false
-	Twins: [[Come play with us Danny]]
+if global.tak_given == false and global.item_taken == false
+	Ghost: [[Come play with us Danny]]
 	- Help me!
-		Twins: Do you want to leave?
+		Ghost: Do you want to leave?
 		- Yes, please!
-			Twins: Go where the knowledge sleeps.
+			Ghost: Go where the knowledge sleeps.
+			set global.tak_given = true
 		- Not yet => END
 	- Goodbye => END
 else:
-	Twins: You should go now...
+	Ghost: You should go now...
 	=> END
 => END

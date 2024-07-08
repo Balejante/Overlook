@@ -1,0 +1,12 @@
+~ start
+if global.tak_given == false and global.item_taken == false
+	Ghost: Already leaving, Danny?
+	- How do I leave the Maze?
+		Ghost: You should go where your heart tells.
+		set global.tak_given = true
+		=> END
+	- Not yet => END
+else:
+	Ghost: You should go now...
+	=> END
+=> END
