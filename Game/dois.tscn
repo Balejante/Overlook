@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://m1wrn5u3c1m8"]
+[gd_scene load_steps=76 format=3 uid="uid://m1wrn5u3c1m8"]
 
 [ext_resource type="Texture2D" uid="uid://iyskjj7x8fuq" path="res://Sprites/Tiles/mine2.png" id="1_4wrpx"]
 [ext_resource type="Texture2D" uid="uid://c8uqbkgsnvybx" path="res://Sprites/dungeon1.png" id="1_sej2g"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://Game/item.gd" id="9_glnla"]
 [ext_resource type="Texture2D" uid="uid://c0f1pebtkyn7s" path="res://Sprites/BaetoriceSpriteRPGMakerVXAce.png" id="9_jj224"]
 [ext_resource type="Texture2D" uid="uid://c3hfk2c3gto3i" path="res://Sprites/880789.png" id="11_4tq42"]
+[ext_resource type="AudioStream" uid="uid://bjo6w5jeyy68e" path="res://Pokemon Fire Red and Leaf Green - Lavender Town music.mp3" id="12_qy6yg"]
 
 [sub_resource type="GDScript" id="GDScript_3nipx"]
 script/source = "extends Node2D
@@ -3840,6 +3841,11 @@ layer_0/tile_data = PackedInt32Array(7077825, 458752, 11, 7143361, 458752, 11, 7
 [node name="corDaParteSemLuz" type="CanvasModulate" parent="."]
 position = Vector2(0, -10)
 color = Color(0.0784314, 0.0784314, 0.0784314, 1)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_qy6yg")
+volume_db = -17.0
+autoplay = true
 
 [connection signal="area_entered" from="AnimPlayer/Area2D" to="AnimPlayer" method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="AnimPlayer/Area2D" to="AnimPlayer" method="_on_area_2d_body_entered"]

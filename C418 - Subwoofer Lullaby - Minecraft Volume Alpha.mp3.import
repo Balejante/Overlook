@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dtxhc3pa3e7pc"
+path="res://.godot/imported/C418 - Subwoofer Lullaby - Minecraft Volume Alpha.mp3-907b723eae1c91f7cf597a9712218f29.mp3str"
+
+[deps]
+
+source_file="res://C418 - Subwoofer Lullaby - Minecraft Volume Alpha.mp3"
+dest_files=["res://.godot/imported/C418 - Subwoofer Lullaby - Minecraft Volume Alpha.mp3-907b723eae1c91f7cf597a9712218f29.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

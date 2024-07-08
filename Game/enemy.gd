@@ -20,5 +20,6 @@ func animate():
 func _physics_process(delta):
 	navigation_agent.target_position = character_to_chase.global_position
 	velocity = global_position.direction_to(navigation_agent.get_next_path_position()) * SPEED
-	move_and_slide()
+	if !Global.is_chatting:
+		move_and_slide()
 	animate()

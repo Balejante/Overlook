@@ -27,7 +27,8 @@ func animate():
 		sprite.stop()
 
 func move_8way(delta):
-	get_8way_input()
+	if !Global.is_chatting:
+		get_8way_input()
 	animate()
 	#move_and_slide()
 
@@ -35,7 +36,8 @@ func move_8way(delta):
 	#move_8way(delta)
 
 func _physics_process(delta):
-	get_8way_input()
+	if !Global.is_chatting:
+		get_8way_input()
 	animate()
 	var collision_info = move_and_collide(velocity * delta)
 	if collision_info:
@@ -44,6 +46,8 @@ func _physics_process(delta):
 	#move_and_slide()
 	if twins_in_range == true:
 		if Input.is_action_just_pressed("ui_accept"):
+			Global.is_chatting = true
+			print(Global.is_chatting, "conversa começou")
 			DialogueManager.show_dialogue_balloon(load("res://dialog1.dialogue"),"start")
 			return
 	if item_detection == true:

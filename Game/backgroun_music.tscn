@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6oktgjxqi7a4"]
+
+[ext_resource type="AudioStream" uid="uid://bjo6w5jeyy68e" path="res://Pokemon Fire Red and Leaf Green - Lavender Town music.mp3" id="1_txikn"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_txikn")
+autoplay = true

@@ -127,6 +127,8 @@ func get_next_dialogue_line(resource: DialogueResource, key: String = "", extra_
 		if actual_next_id in [DialogueConstants.ID_END_CONVERSATION, DialogueConstants.ID_NULL, null]:
 			# End the conversation
 			(func(): dialogue_ended.emit(resource)).call_deferred()
+			Global.is_chatting = false
+			print("ACABOOOOUUUU!!")
 			return null
 		else:
 			return await get_next_dialogue_line(resource, dialogue.next_id, extra_game_states, mutation_behaviour)
