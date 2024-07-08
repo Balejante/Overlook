@@ -6,23 +6,35 @@ if global.tak_given == false and global.item_taken == false and global.task1_giv
 		- Yes, please!
 			Ghost: Go where the knowledge sleeps.
 			set global.tak_given = true
-		- Not yet => END
-	- Goodbye => END
+			set Global.is_chatting = false
+		- Not yet
+			set Global.is_chatting = false 
+			=> END
+	- Goodbye
+		set Global.is_chatting = false 
+		=> END
 elif global.tak_given == false and global.item_given == false and global.task2_given == true:
 	Ghost: [[Hi|Hello]], Danny. What do you want now?
 	- How do I go outside?
 		Ghost: I think Mr. Ullman keeps the keys in his office...
 		set global.tak_given = true
+		set Global.is_chatting = false
 		=> END
-	- Nothing => END
+	- Nothing
+		set Global.is_chatting = false 
+		=> END
 elif global.tak_given == false and global.item_given == false and global.task3_given == true:
 	Ghost: Already leaving, Danny?
 	- How do I leave the Maze?
 		Ghost: You should go where your heart tells.
 		set global.tak_given = true
+		set Global.is_chatting = false
 		=> END
-	- Not yet => END
+	- Not yet
+		set Global.is_chatting = false 
+		=> END
 else:
 	Ghost: You should go now...
+	set Global.is_chatting = false
 	=> END
 => END
