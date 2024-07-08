@@ -3,7 +3,7 @@ extends CharacterBody2D
 @onready var navigation_agent = $NavigationAgent2D
 @export var character_to_chase: CharacterBody2D
 @onready var sprite = $enemySprite
-const SPEED = 180.0
+const SPEED = 150.0
 
 func animate():
 	if velocity.x > 0:

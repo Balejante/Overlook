@@ -3012,13 +3012,15 @@ sprite_frames = SubResource("SpriteFrames_4xkmd")
 animation = &"down"
 
 [node name="item" type="StaticBody2D" parent="."]
-position = Vector2(-976, 376)
+position = Vector2(-652, 1602)
 script = ExtResource("11_c1cxw")
+metadata/_edit_group_ = true
 
 [node name="item-shape" type="CollisionShape2D" parent="item"]
 shape = SubResource("RectangleShape2D_i7bkq")
 
 [node name="item_detection_area" type="Area2D" parent="item"]
+metadata/_edit_group_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="item/item_detection_area"]
 shape = SubResource("CircleShape2D_alnlk")
